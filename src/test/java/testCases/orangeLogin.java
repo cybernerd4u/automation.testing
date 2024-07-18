@@ -10,6 +10,7 @@ import java.time.Duration;
 
 public class orangeLogin {
 
+    @Test
     public static void main(String[] args) throws InterruptedException {
         // Setup WebDriver
         WebDriver driver = new ChromeDriver();
