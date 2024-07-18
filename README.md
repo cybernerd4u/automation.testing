@@ -59,7 +59,7 @@ This repository contains automated tests for a web application's login functiona
 1. Clone the repository:
     ```bash
     git clone https://github.com/cybernerd4u/automation.testing.git
-    cd your-repo-name
+    cd automation.testing.git
     ```
 
 2. Navigate to the Selenium test directory:
