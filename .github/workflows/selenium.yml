@@ -1,11 +1,33 @@
+<<<<<<< HEAD
 name: Selenium Test
 
 on: [push, pull_request]
+=======
+name: Java CI with Maven
+
+on:
+  workflow_dispatch:
+    inputs:
+      browsername:
+        type: string
+        description: 'browser name'
+        default: 'chrome'
+      testname:
+        description: 'enter the regex to run the tests'
+        type: string
+      xmlsname:
+        type: string
+        description: 'enter one or multiple xmls to run'
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+>>>>>>> ce06a48c7a89e271f84953661355832c2c5cde85
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     services:
       selenium:
@@ -14,6 +36,7 @@ jobs:
           - 4444:4444
 
     steps:
+<<<<<<< HEAD
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -39,3 +62,34 @@ jobs:
       env:
         DISPLAY: ':99.0'
         _JAVA_OPTIONS: '-Dwebdriver.chrome.driver=/usr/bin/google-chrome'
+=======
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          cache: Maven
+
+      - name: Print working directory
+        run: pwd
+
+      - name: List files in project directory
+        run: ls -l
+
+      - name: Build with Maven
+        run: mvn -X -B package --file pom.xml
+        timeout-minutes: 10
+
+      - name: Run tests
+        run: mvn test
+
+      - name: List files in target directory
+        if: failure()
+        run: ls -l target
+
+      - name: Display Maven logs for debugging
+        if: failure()
+        run: cat $(find . -name "*.log")
+>>>>>>> ce06a48c7a89e271f84953661355832c2c5cde85
